@@ -6,7 +6,7 @@ import refs from './js/refs.js';
 
 import { renderCategories, renderProducts } from './js/render-function.js';
 
-import { getCategories, getProducts, getProductsByCategory } from './js/products-api.js';
+import { getCategories, getProducts, getProductsByCategory, searchProducts } from './js/products-api.js';
 
 // початкова змінна для сторінки 
 let currentPage = 1;
@@ -15,6 +15,8 @@ let currentPage = 1;
 const perPage = 12;
 
 let currentCategory = 'All';
+
+let currentQuery = '';
 
 // функція для додавання лоадмор кнопки з перевіркою для того щоб коли є товар Ю 12 вона була коли товару менше 12 то зникала
 function updateLoadMoreButton(productData) {
@@ -51,13 +53,17 @@ async function initHomePage() {
 refs.loadMoreBtn.addEventListener('click', async (e) => {
     currentPage += 1;
     let productData;
-    if (currentCategory === 'All') {
+    // пошук завжди перший
+    if (currentQuery) {
+        productData = await searchProducts(currentQuery, currentPage, perPage)
+    }
+    else if (currentCategory === 'All') {
         productData = await getProducts(currentPage, perPage)
     }
     else {
         productData = await getProductsByCategory(currentCategory, currentPage, perPage)
     }
-    renderProducts(productData.products, true);
+    renderProducts(productData.products, true)  ;
   updateLoadMoreButton(productData);
 });
 
@@ -95,4 +101,36 @@ refs.categories.addEventListener('click', async (e) => {
     }
 });
 
-// кнопка лоад море
+
+// пошук товару
+refs.searchForm.addEventListener('submit', async (e) => {
+    
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const value = formData.get('searchValue').trim();
+   
+    if (value === '') {
+        iziToast.error(
+            { message: 'Write pls somptng' });
+        return;
+    }
+    
+    currentQuery = value;
+    currentPage = 1;
+    currentCategory = 'All';
+
+    const productData = await searchProducts(currentQuery, currentPage, perPage)
+
+    if (productData.products.length === 0) {
+        refs.products.innerHTML = '';
+        refs.notFound.classList.add('is-visible');
+    }
+    else {
+        refs.notFound.classList.remove('is-visible');
+        renderProducts(productData.products);
+    }
+ 
+    updateLoadMoreButton(productData)
+    refs.searchForm.reset();
+});

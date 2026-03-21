@@ -3,7 +3,7 @@ import axios from "axios";
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-export { getCategories, getProducts, getProductsByCategory };
+export { getCategories, getProducts, getProductsByCategory, searchProducts };
 const api = axios.create ({
     baseURL: 'https://dummyjson.com'});
 

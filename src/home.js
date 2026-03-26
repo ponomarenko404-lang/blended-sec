@@ -18,7 +18,7 @@ let currentCategory = 'All';
 
 let currentQuery = '';
 
-// функція для додавання лоадмор кнопки з перевіркою для того щоб коли є товар Ю 12 вона була коли товару менше 12 то зникала
+// функція для додавання лоадмор кнопки з перевіркою для того щоб коли є товар > 12 вона була коли товару менше 12 то зникала
 function updateLoadMoreButton(productData) {
  const loadedProducts = currentPage * perPage;
     const totalProducts = productData.total;
@@ -31,7 +31,7 @@ function updateLoadMoreButton(productData) {
     }
 }
 
-// функція для рендеру всього товару
+// функція для запуску всього товару
 
 async function initHomePage() {
     const categories = await getCategories();

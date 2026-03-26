@@ -7,7 +7,10 @@ const refs = {
     themeBtn: document.querySelector('.theme-toggle-btn'),
     scrollTopBtn: document.querySelector('.scroll-top-btn'),
     notFound: document.querySelector('.not-found'),
+    modal: document.querySelector('.modal'),
+    modalRenderProduct: document.querySelector('.modal-product'),
+    productsItem:document.querySelector('.products__item'),
 };
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+// import iziToast from 'izitoast';
+// import 'izitoast/dist/css/iziToast.min.css';
 export default refs;

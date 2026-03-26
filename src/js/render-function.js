@@ -1,6 +1,6 @@
 import refs from "./refs.js";
 // export const renderRef = { renderCategories, renderProducts };
-export { renderCategories, renderProducts };
+export { renderCategories, renderProducts, renderModalProduct };
 
 function renderCategories(categories) {
     const markup = categories.map(item => {
@@ -30,7 +30,23 @@ function renderProducts(products, append = false) {
     else {
         refs.products.innerHTML = markup;
     }
+};
 
-    
+// функція для рендеру продукту в модалку
+
+function renderModalProduct(product) {
+    const markup =
+        `<img class="modal-product__img" src="${product.thumbnail}" alt="${product.title}" />
+      <div class="modal-product__content">
+        <p class="modal-product__title">${product.title}</p>
+        <ul class="modal-product__tags">${product.tags.map(tag => `<li>${tag}</li>`).join('')}</ul>
+        <p class="modal-product__description">${product.description}</p>
+        <p class="modal-product__shipping-information">Shipping:${product.shippingInformation}</p>
+        <p class="modal-product__return-policy">Return Policy:${product.returnPolicy}</p>
+        <p class="modal-product__price">Price: $${product.price}</p>
+        <button class="modal-product__buy-btn" type="button">Buy</button>
+      </div>`
+    ;
+    refs.modalRenderProduct.innerHTML = markup;
 };
 

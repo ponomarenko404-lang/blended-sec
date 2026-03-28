@@ -9,7 +9,8 @@ const refs = {
     notFound: document.querySelector('.not-found'),
     modal: document.querySelector('.modal'),
     modalRenderProduct: document.querySelector('.modal-product'),
-    productsItem:document.querySelector('.products__item'),
+    productsItem: document.querySelector('.products__item'),
+    modalCloseBtn: document.querySelector('.modal__close-btn')
 };
 // import iziToast from 'izitoast';
 // import 'izitoast/dist/css/iziToast.min.css';

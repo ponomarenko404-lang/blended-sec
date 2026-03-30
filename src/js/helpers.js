@@ -1,3 +1,4 @@
+import refs from "./refs";
 export function getCartButton() {
     return document.querySelector('.modal-product__btn--cart');
 };
@@ -27,5 +28,8 @@ if (btn) btn.textContent = 'Add to cart';
     localStorage.setItem('cart', JSON.stringify(storage));
     return storage;
 };
-
-export { addToCart, removeFromCart };
+// update cart count
+ function updateCartCount(storage) {
+    refs.dataCardCount.textContent = storage.length;
+}
+export { addToCart, removeFromCart, updateCartCount, };

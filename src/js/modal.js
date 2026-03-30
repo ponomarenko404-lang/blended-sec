@@ -1,10 +1,11 @@
 import refs from "./refs.js";
 import { getProductById } from "./products-api.js";
 import { renderModalProduct } from "./render-function.js";
-import { addToCart, removeFromCart, getCartButton } from "./helpers.js";
+import { addToCart, removeFromCart, getCartButton, updateCartCount } from "./helpers.js";
 
 let storage = JSON.parse(localStorage.getItem('cart')) || [];
 let currentModalProductId = null;
+
 
 // ------------------------------
 // Відкриття модалки при кліку на продукт
@@ -47,8 +48,11 @@ refs.modal.addEventListener('click', (e) => {
 
     if (storage.includes(currentModalProductId)) {
         storage = removeFromCart(currentModalProductId, storage);
+        updateCartCount(storage);
+        // refs.dataCardCount.textContent = storage.length;
     } else {
         storage = addToCart(currentModalProductId, storage);
+        updateCartCount(storage);
     }
 
     console.log('current cart:', storage);

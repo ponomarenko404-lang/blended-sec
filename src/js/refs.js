@@ -10,8 +10,12 @@ const refs = {
     modal: document.querySelector('.modal'),
     modalRenderProduct: document.querySelector('.modal-product'),
     productsItem: document.querySelector('.products__item'),
-    modalCloseBtn: document.querySelector('.modal__close-btn')
+    modalCloseBtn: document.querySelector('.modal__close-btn'),
+    dataCardCount: document.querySelector('[data-cart-count]'),
+    dataWishCount: document.querySelector('[data-wishlist-count]'),
 };
 // import iziToast from 'izitoast';
 // import 'izitoast/dist/css/iziToast.min.css';
 export default refs;
+
+
